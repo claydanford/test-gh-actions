@@ -3,6 +3,13 @@ name: build
 on: [push]
 
 jobs:
+  login:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.login.outputs.test }}
+    steps:
+      - id: login
+        run: echo "::set-output name=test::foo"
   build:
     needs: login
     runs-on: ubuntu-latest
