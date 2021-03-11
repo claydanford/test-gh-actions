@@ -4,6 +4,8 @@ on: [push]
 
 jobs:
   build:
+    needs: login
     runs-on: ubuntu-latest
     steps:
       - run: echo BUILD-FOO
+      - run: echo ${{needs.login.outputs.test}}
