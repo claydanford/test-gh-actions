@@ -27,6 +27,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - run: echo foo > foo.txt
+      - run: ls
 
       - uses: actions/upload-artifact@v2
         if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' }}
@@ -43,8 +44,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: actions/download-artifact@v2
-        with:
-          name: artifact
 
       - run: cat foo.txt
 
@@ -59,4 +58,6 @@ jobs:
 
       - uses: actions/download-artifact@v2
 
+      - run: cd ./artifact
+      - run: ls
       - run: cat foo.txt
