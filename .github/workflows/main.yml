@@ -31,6 +31,8 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' }}
+        with:
+          path: foo.txt
 
   deploy-dev:
     name: Deploy to dev
@@ -55,6 +57,7 @@ jobs:
       - uses: actions/download-artifact@v2
 
       - run: |
+          ls
           cd ./artifact
           ls
           cat foo.txt
