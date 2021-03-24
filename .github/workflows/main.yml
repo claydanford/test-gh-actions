@@ -34,9 +34,9 @@ jobs:
         with:
           path: foo.txt
 
-  deploy-dev:
+  deploy:
     name: Deploy to dev
-    environment: develop
+    environment: ${{ github.ref == 'refs/heads/develop' && 'dev' || 'prod' }}
     if: ${{ github.ref == 'refs/heads/develop' }}
     runs-on: ubuntu-latest
     needs: [build, test]
@@ -46,18 +46,3 @@ jobs:
       - uses: actions/download-artifact@v2
 
       - run: cat foo.txt
-
-  publish:
-    name: Publish artifacts
-    environment: production
-    if: ${{ github.ref == 'refs/heads/master' }}
-    runs-on: ubuntu-latest
-    needs: [build, test]
-    steps:
-      - uses: actions/download-artifact@v2
-
-      - run: |
-          ls
-          cd ./artifact
-          ls
-          cat foo.txt
