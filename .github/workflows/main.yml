@@ -26,15 +26,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: mkdir out
+      - run: mkdir build
 
-      - run: echo foo > out/foo.txt
+      - run: echo foo > build/foo.txt
       - run: ls
 
       - uses: actions/upload-artifact@v2
         if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' }}
         with:
-          path: out
+          name: build
+          path: build
 
   deploy:
     name: Deploy to dev
@@ -48,3 +49,5 @@ jobs:
       - uses: actions/download-artifact@v2
 
       - run: ls
+
+      - run: cat build/foo.txt
