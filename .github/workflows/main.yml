@@ -14,8 +14,6 @@ jobs:
     name: plan
     runs-on: ubuntu-latest
 
-    environment: "${{ github.base_ref == 'refs/heads/develop' && dev || prod }}"
-
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -31,8 +29,6 @@ jobs:
   apply:
     name: apply
     runs-on: ubuntu-latest
-
-    environment: ${{ github.base_ref == 'refs/heads/develop' && 'dev' || prod }}
     if: github.event.issue.pull_request && contains(github.event.comment.body, 'terraform apply')
 
     env:
