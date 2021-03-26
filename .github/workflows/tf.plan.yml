@@ -7,13 +7,13 @@ on:
       - main
       - master
   issue_comment:
-    type:
-      - created
+    types: [created]
 
 jobs:
   plan:
     name: plan
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,7 +30,7 @@ jobs:
   apply:
     name: apply
     runs-on: ubuntu-latest
-    if: github.event.issue.pull_request && contains(github.event.comment.body, 'terraform apply')
+    if: github.event.issue.pull_request
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
