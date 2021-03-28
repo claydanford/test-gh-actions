@@ -1,14 +1,10 @@
-name: Terraform Deploy
+name: Terraform Plan
 
 on:
   pull_request:
     branches:
       - develop
-      - main
       - master
-  issue_comment:
-    type:
-      - created
 
 jobs:
   plan:
@@ -24,24 +20,5 @@ jobs:
 
       - name: terraform plan
         uses: dflook/terraform-plan@v1
-        with:
-          path: infra
-
-  apply:
-    name: apply
-    runs-on: ubuntu-latest
-    if: github.event.issue.pull_request && contains(github.event.comment.body, 'terraform apply')
-
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: refs/pull/${{ github.event.issue.number }}/merge
-
-      - name: terraform apply
-        uses: dflook/terraform-apply@v1
         with:
           path: infra
