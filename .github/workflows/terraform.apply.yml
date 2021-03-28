@@ -1,24 +1,22 @@
-name: Terraform Plan
+name: Terraform Apply
 
 on:
-  pull_request:
+  push:
     branches:
-      - develop
       - master
+      - develop
 
 jobs:
-  plan:
-    name: plan
+  apply:
     runs-on: ubuntu-latest
-
+    name: apply
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: terraform plan
-        uses: dflook/terraform-plan@v1
+      - name: terraform apply
+        uses: dflook/terraform-apply@v1
         with:
           path: infra
