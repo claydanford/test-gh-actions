@@ -1,3 +1,1 @@
 # test-gh-actions
-
-.
