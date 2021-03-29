@@ -1,17 +1,20 @@
 name: Terraform Plan
 
 on:
-  pull_request:
+  push:
     branches:
+      - main
       - develop
-      - master
 
 jobs:
-  plan:
-    name: plan
+  dev-plan:
+    name: dev plan
     runs-on: ubuntu-latest
+    environment: dev
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -20,3 +23,23 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: infra
+          var_file: infra/dev.tfvars
+          backend_config_file: infra/dev.backend.tfvars
+  prod-plan:
+    name: prod plan
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: terraform plan
+        uses: dflook/terraform-plan@v1
+        with:
+          path: infra
+          var_file: infra/prod.tfvars
+          backend_config_file: infra/prod.backend.tfvars
