@@ -8,8 +8,8 @@ on:
       - develop
 
 jobs:
-  dev-plan:
-    name: dev plan
+  dev:
+    name: dev
     runs-on: ubuntu-latest
     if: github.base_ref == 'refs/heads/develop'
     environment: dev
@@ -26,8 +26,8 @@ jobs:
         with:
           path: infra
 
-  prod-plan:
-    name: prod plan
+  prod:
+    name: prod
     runs-on: ubuntu-latest
     if: github.base_ref == 'refs/heads/master'
     environment: prod

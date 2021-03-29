@@ -8,8 +8,8 @@ on:
       - develop
 
 jobs:
-  dev-apply:
-    name: dev apply
+  dev:
+    name: dev
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
     environment: dev
@@ -28,8 +28,8 @@ jobs:
           var_file: infra/dev.tfvars
           backend_config_file: infra/dev.backend.tfvars
 
-  prod-apply:
-    name: prod apply
+  prod:
+    name: prod
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     environment: prod
