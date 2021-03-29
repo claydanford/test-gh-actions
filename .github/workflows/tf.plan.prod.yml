@@ -9,7 +9,7 @@ jobs:
   plan:
     name: plan
     runs-on: ubuntu-latest
-    if: github.event.pull_request.base.ref == 'main'
+    if: github.event.pull_request.base.ref == 'master'
     environment: prod
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
