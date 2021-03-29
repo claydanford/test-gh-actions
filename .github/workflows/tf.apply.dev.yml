@@ -6,8 +6,8 @@ on:
       - develop
 
 jobs:
-  plan:
-    name: plan
+  apply:
+    name: apply
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
     environment: dev
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: terraform plan
+      - name: terraform apply
         uses: dflook/terraform-apply@v1
         with:
           path: infra
