@@ -3,7 +3,6 @@ name: Terraform Plan
 on:
   pull_request:
     branches:
-      - main
       - master
       - develop
 
@@ -11,7 +10,7 @@ jobs:
   dev:
     name: dev
     runs-on: ubuntu-latest
-    if: github.base_ref == 'refs/heads/develop'
+    # if: github.base_ref == 'refs/heads/develop'
     environment: dev
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -29,7 +28,7 @@ jobs:
   prod:
     name: prod
     runs-on: ubuntu-latest
-    if: github.base_ref == 'refs/heads/master'
+    # if: github.base_ref == 'refs/heads/master'
     environment: prod
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
