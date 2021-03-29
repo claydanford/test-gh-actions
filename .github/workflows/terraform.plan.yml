@@ -1,16 +1,16 @@
 name: Terraform Plan
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
       - master
       - develop
 
 jobs:
-  dev-plan:
-    name: dev plan
+  dev:
+    name: dev
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'develop'
     environment: dev
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,11 +24,11 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: infra
-          var_file: infra/dev.tfvars
-          backend_config_file: infra/dev.backend.tfvars
-  prod-plan:
-    name: prod plan
+
+  prod:
+    name: prod
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'master'
     environment: prod
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,5 +42,3 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: infra
-          var_file: infra/prod.tfvars
-          backend_config_file: infra/prod.backend.tfvars

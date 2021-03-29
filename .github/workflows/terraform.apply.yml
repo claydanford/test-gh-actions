@@ -8,8 +8,8 @@ on:
       - develop
 
 jobs:
-  dev-apply:
-    name: dev apply
+  dev:
+    name: dev
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
     environment: dev
@@ -25,11 +25,9 @@ jobs:
         uses: dflook/terraform-apply@v1
         with:
           path: infra
-          var_file: infra/dev.tfvars
-          backend_config_file: infra/dev.backend.tfvars
 
-  prod-apply:
-    name: prod apply
+  prod:
+    name: prod
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     environment: prod
@@ -45,5 +43,3 @@ jobs:
         uses: dflook/terraform-apply@v1
         with:
           path: infra
-          var_file: infra/prod.tfvars
-          backend_config_file: infra/prod.backend.tfvars
