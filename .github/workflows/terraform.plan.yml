@@ -10,7 +10,7 @@ jobs:
   dev:
     name: dev
     runs-on: ubuntu-latest
-    if: github.event.pull_request.base.ref == 'refs/heads/develop'
+    if: github.event.pull_request.base.ref == 'develop'
     environment: dev
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,7 +28,7 @@ jobs:
   prod:
     name: prod
     runs-on: ubuntu-latest
-    if: github.event.pull_request.base.ref == 'refs/heads/master'
+    if: github.event.pull_request.base.ref == 'master'
     environment: prod
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
