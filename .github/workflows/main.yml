@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: build/*.zip
+          path: build
 
   test:
     name: prod
@@ -34,4 +34,6 @@ jobs:
 
       - run: |
           pwd
+          ls
+          cd build
           ls
