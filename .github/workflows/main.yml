@@ -1,0 +1,36 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: build
+        run: |
+          mkdir build
+          mkdir baz
+          echo "foo" > baz/bar.txt
+          zip -r build/foo.zip baz/
+
+      - name: stash artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build/*.zip
+
+  test:
+    name: prod
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: retrieve artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+
+      - run: |
+          pwd
+          ls
