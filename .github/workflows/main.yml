@@ -24,7 +24,7 @@ jobs:
       - name: bar
         run: |
           ls
-          cd ../baz
+          cd baz
           ls
           cd ../build
           ls
