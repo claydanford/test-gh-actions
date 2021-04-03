@@ -19,7 +19,15 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: build
+          path: build/
+
+      - name: bar
+        run: |
+          ls
+          cd ../baz
+          ls
+          cd ../build
+          ls
 
   test:
     name: prod
